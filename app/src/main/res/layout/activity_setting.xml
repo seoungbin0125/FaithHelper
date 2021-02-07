@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gallery_top">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id = "@+id/scrollView">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/c_sm_bg">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/c_sm_bg"
+                android:id ="@+id/settingSense">
+
+                <RelativeLayout
+                    android:id="@+id/rlDeviceListTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/showmode_title_top">
+
+                    <TextView
+                        android:id="@+id/tvBtnBack"
+                        android:textAppearance="@style/TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/selector_back"/>
+
+                    <TextView
+                        android:textAppearance="@style/MainMenuTitleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tvBtnBack"
+                        android:layout_marginLeft="20dp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/text_menu_title_setting"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:textAppearance="@style/MainMenuTitleText"
+                    android:id="@+id/settingLabel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_menu_setting_use_mode"
+                    android:gravity="center"
+                    android:layout_below="@id/rlDeviceListTop"
+                    android:textColor="@color/c_white"
+                    android:background="@drawable/selector_connect_bar" />
+
+
+                <CheckBox
+                    android:id="@+id/checkUseBtMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settingLabel1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:checked="true"
+                    android:text="Bluetooth 모드" />
+
+                <CheckBox
+                    android:id="@+id/checkUseLoraMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkUseBtMooe"
+                    android:layout_alignStart="@+id/checkUseBtMooe"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="9dp"
+                    android:text="LORA 모드" />
+
+                <CheckBox
+                    android:id="@+id/checkUseClockMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkUseLoraMooe"
+                    android:layout_alignStart="@+id/checkUseLoraMooe"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="-1dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="11dp"
+                    android:text="CLOCK 모드" />
+
+                <CheckBox
+                    android:id="@+id/checkUseDpMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settingLabel1"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="77dp"
+                    android:layout_marginRight="77dp"
+                    android:text="DISPLAY 모드" />
+
+                <CheckBox
+                    android:id="@+id/checkUseWifiMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkUseDpMooe"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="105dp"
+                    android:layout_marginRight="105dp"
+                    android:text="WIFI 모드" />
+
+                <Button
+                    android:id="@+id/tvBtnDefalutModeSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/checkUseClockMooe"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="사용 모드 저장"
+                    android:textStyle="bold"
+                    android:textColor="@color/c_black_1"
+                    android:background="@drawable/btn_blue_stroke_black"
+                    />
+
+                <TextView
+                    android:textAppearance="@style/MainMenuTitleText"
+                    android:id="@+id/settingLabel2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_menu_setting_start_mode"
+                    android:gravity="center"
+                    android:textColor="@color/c_white"
+                    android:layout_below="@id/tvBtnDefalutModeSave"
+                    android:background="@drawable/selector_connect_bar" />
+
+
+                <RadioButton
+                    android:id="@+id/radioStartBtMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settingLabel2"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Bluetooth 모드" />
+
+                <RadioButton
+                    android:id="@+id/radioStartDpMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settingLabel2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginStart="74dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_toEndOf="@+id/radioStartBtMooe"
+                    android:text="DISPLAY 모드" />
+
+                <RadioButton
+                    android:id="@+id/radioStartLoraMooe"
+                    android:layout_below="@id/radioStartDpMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="LORA 모드" />
+
+                <RadioButton
+                    android:id="@+id/radioStartWifiMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/radioStartDpMooe"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/radioStartLoraMooe"
+                    android:text="WIFI 모드" />
+
+                <RadioButton
+                    android:id="@+id/radioStartClockMooe"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/radioStartWifiMooe"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="CLOCK 모드" />
+
+
+
+                <Button
+                    android:id="@+id/tvBtnStartModeSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/radioStartClockMooe"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-1dp"
+                    android:text="시작 모드 저장"
+                    android:textStyle="bold"
+                    android:textColor="@color/c_black_1"
+                    android:background="@drawable/btn_blue_stroke_black" />
+
+                <TextView
+                    android:textAppearance="@style/MainMenuTitleText"
+                    android:id="@+id/settingLabel3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_menu_setting_led_bright"
+                    android:gravity="center"
+                    android:textColor="@color/c_white"
+                    android:layout_below="@id/tvBtnStartModeSave"
+                    android:background="@drawable/selector_connect_bar" />
+
+                />
+                <com.xw.repo.BubbleSeekBar
+                    android:id="@+id/sbSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/settingLabel3"
+                    app:bsb_hide_bubble="true"
+                    app:bsb_auto_adjust_section_mark="true"
+                    app:bsb_track_color="@color/c_cl_blue"
+                    app:bsb_thumb_color="@color/c_cl_yellow"
+                    app:bsb_max="4"
+                    app:bsb_min="1"
+                    app:bsb_progress="4"
+                    app:bsb_seek_by_section="true"
+                    app:bsb_section_count="3"
+                    app:bsb_section_text_position="below_section_mark"
+                    app:bsb_show_progress_in_float="false"
+                    app:bsb_show_section_mark="true"
+                    app:bsb_seek_step_section="true"
+                    app:bsb_show_section_text="true"
+                    app:bsb_show_thumb_text="true"
+                    app:bsb_track_size="10dp"
+                    app:bsb_touch_to_seek="true"/>
+                <Button
+                    android:id="@+id/tvBtnLedLevelSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="LED 밝기 저장"
+                    android:background="@drawable/btn_blue_stroke_black"
+                    android:layout_below="@id/sbSpeed"
+                    android:layout_marginLeft="10dp"
+                    />
+                <TextView
+                    android:textAppearance="@style/MainMenuTitleText"
+                    android:id="@+id/settingLabelRotaion"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_menu_setting_rotation"
+                    android:gravity="center"
+                    android:textColor="@color/c_white"
+                    android:layout_below="@id/tvBtnLedLevelSave"
+                    android:background="@drawable/selector_connect_bar" />
+
+                <Button
+                    android:id="@+id/btnRotationMode64x32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settingLabelRotaion"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="168dp"
+                    android:background="@drawable/btn_blue_stroke_black"
+                    android:text="64x32" />
+
+                <Button
+                    android:id="@+id/btnRotationMode32x64"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settingLabelRotaion"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="100dp"
+                    android:background="@drawable/btn_blue_stroke_black"
+                    android:text="32x64" />
+
+                <TextView
+                    android:textAppearance="@style/MainMenuTitleText"
+                    android:id="@+id/settingLabelBattery"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_menu_setting_battery_info"
+                    android:gravity="center"
+                    android:textColor="@color/c_white"
+                    android:layout_below="@id/btnRotationMode32x64"
+                    android:background="@drawable/selector_connect_bar" />
+
+                <com.mackhartley.roundedprogressbar.RoundedProgressBar
+                    android:id="@+id/batteryProgressbar"
+                    android:layout_width="500dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/settingLabelBattery"
+                    app:rpbBgTextColor="@color/c_black_1"
+                    app:rpbProgressBgColor="@color/c_white"
+                    app:rpbTextColor="@color/c_gray_3"
+                    app:rpbProgress="0"
+                    app:rpbProgressColor="@color/c_cl_green"
+                    />
+
+                <Button
+                    android:id="@+id/btnBatteryRenew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/batteryProgressbar"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="163dp"
+                    android:background="@drawable/btn_blue_stroke_black"
+                    android:text="배터리 갱신" />
+
+                <TextView
+                    android:textAppearance="@style/MainMenuTitleText"
+                    android:id="@+id/settingLabelLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_menu_setting_logo_send"
+                    android:gravity="center"
+                    android:textColor="@color/c_white"
+                    android:layout_below="@id/btnBatteryRenew"
+                    android:background="@drawable/selector_connect_bar" />
+
+                <Button
+                    android:id="@+id/btnMoveLogoPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settingLabelLogo"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="163dp"
+                    android:background="@drawable/btn_blue_stroke_black"
+                    android:text="로고 설정" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/logoSense"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnLogoSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoSense"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="163dp"
+        android:visibility="invisible"
+        android:background="@drawable/btn_blue_stroke_black"
+        android:text="로고 전송" />
+
+    <Button
+        android:id="@+id/btnBackLogoPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoSense"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="163dp"
+        android:visibility="invisible"
+        android:background="@drawable/btn_blue_stroke_black"
+        android:text="돌아가기" />
+</RelativeLayout>
+
+
+
+
+

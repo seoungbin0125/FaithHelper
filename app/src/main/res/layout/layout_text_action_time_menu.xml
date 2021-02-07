@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llActionSpeed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingTop="5dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp"
+    android:background="@drawable/box_1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llActionSpeed2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/tvTxtSpeed"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:inputType="numberSigned"
+            android:background="@drawable/border"
+            android:textAlignment="center"/>
+
+
+        <EditText
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp"
+            android:gravity="left"
+            android:inputType="numberSigned"
+            android:text="ms"
+            android:enabled="false"/>
+
+        <TextView
+            android:id="@+id/tvSubTitleView"
+            android:textAppearance="@style/MainMenuSubTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:layout_marginLeft="70dp"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:text="@string/text_menu_text_speed_time" />
+    </LinearLayout>
+
+
+    <com.xw.repo.BubbleSeekBar
+        android:id="@+id/sbSpeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:bsb_bubble_color="#39796b"
+        app:bsb_track_color="#39796b"
+        app:bsb_bubble_text_color="@android:color/white"
+        app:bsb_max="500"
+        app:bsb_min="50"
+        app:bsb_progress="50"
+        app:bsb_section_count="9"
+        app:bsb_section_text_position="bottom_sides"
+        app:bsb_show_progress_in_float="false"
+        app:bsb_show_section_mark="true"
+        app:bsb_show_section_text="true"
+        app:bsb_show_thumb_text="true"
+        app:bsb_touch_to_seek="true"
+        />
+
+</LinearLayout>
