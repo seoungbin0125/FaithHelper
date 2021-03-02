@@ -5,7 +5,7 @@ android {
     buildToolsVersion '29.0.3'
 
     defaultConfig {
-        applicationId "truesolution.ledpad.asign"
+        applicationId "truesolution.ledpad.bin1"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 3
@@ -67,4 +67,5 @@ dependencies {
 
     // location
     implementation 'com.google.android.gms:play-services-location:10.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }

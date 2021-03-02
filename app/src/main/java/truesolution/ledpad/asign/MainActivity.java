@@ -234,14 +234,10 @@ public class MainActivity extends MBaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
-
 		mContext = this;
-
-
 		mPagerAdapter = new MMPagerAdapter(getSupportFragmentManager(), 0, this);
 		vpMain.setAdapter(mPagerAdapter);
 		appManager.getInstance().addActivity(this);
-
 	}
 
 	@Override

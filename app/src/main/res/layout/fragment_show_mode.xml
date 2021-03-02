@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
-            android:text="@string/text_menu_title_device_list"/>
+            android:text="@string/text_menu_title_title"/>
 
         <TextView
             android:id="@+id/tvBtnDeviceListTopMenuInfo"

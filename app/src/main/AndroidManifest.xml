@@ -8,6 +8,7 @@
  If your app targets Android 9 or lower, you can declare
          ACCESS_COARSE_LOCATION instead.
     -->
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -25,7 +26,8 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".utils.LocationServicesRequset"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
@@ -52,11 +54,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenThemeNew"
             android:windowSoftInputMode="adjustNothing" /> <!-- android:windowSoftInputMode="adjustResize" -->
-        <activity
-            android:name=".MUpdateActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/FullScreenThemeNew" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

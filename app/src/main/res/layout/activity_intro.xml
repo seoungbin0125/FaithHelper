@@ -40,6 +40,7 @@
             android:textAppearance="@style/TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Hi"
             android:background="@drawable/intro_l"/>
 
         <TextView
@@ -96,7 +97,8 @@
             android:layout_marginTop="15dp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
-            android:text="Frontier"
+            android:text="King of peace, Jesus.
+"
             android:textColor="@color/c_cell_info"
             android:textSize="28dp"/>
 

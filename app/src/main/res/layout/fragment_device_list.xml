@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
-            android:text="@string/text_menu_title_device_list"/>
+            android:text="@string/text_menu_title_qt"/>
 
         <TextView
             android:id="@+id/tvBtnDeviceListTopMenuInfo"
@@ -28,5 +28,12 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/selector_top_info"/>
     </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_below="@id/rlDeviceListTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </RelativeLayout>

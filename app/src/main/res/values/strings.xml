@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PoP Sign</string>
+    <string name="app_name">King of peace, Jesus.</string>
     <!-- Menu - Draw -->
     <string name="text_draw_title">그리기&amp;텍스트</string>
 
@@ -20,7 +20,9 @@
     <string name="notice_bluetooth_on">해당 Device 에서는 Bluetooth 사용이 불가능합니다..</string>
 
     <!-- Title Text -->
-    <string name="text_menu_title_device_list">디바이스 리스트</string>
+    <string name="text_menu_title_qt">풍삶Q.T</string>
+    <string name="text_menu_title_title">최성빈 최고</string>
+
     <string name="text_menu_title_gallery">갤러리</string>
 <!--    <string name="text_menu_title_draw_text">그리기&amp;텍스트</string>-->
     <string name="text_menu_title_draw_text">그리기</string>

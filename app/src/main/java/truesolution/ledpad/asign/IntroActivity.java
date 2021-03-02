@@ -179,7 +179,7 @@ public class IntroActivity extends MBaseActivity {
 			mHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
-//					mGoMainActivity();
+					mGoMainActivity();
 					BGAlphaThread _thread = new BGAlphaThread();
 					_thread.start();
 				}

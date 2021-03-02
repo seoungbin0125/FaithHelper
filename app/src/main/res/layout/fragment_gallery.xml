@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/c_sm_bg" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/c_sm_bg">
 
     <RelativeLayout
         android:id="@+id/rlDeviceListTop"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
-            android:text="@string/text_menu_title_device_list"/>
+            android:text="@string/text_menu_title_title"/>
 
         <TextView
             android:id="@+id/tvBtnDeviceListTopMenuInfo"
@@ -29,5 +29,10 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/selector_top_info"/>
     </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/rlDeviceListTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"/>
 
 </RelativeLayout>
