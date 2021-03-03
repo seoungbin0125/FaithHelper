@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ public class MFragmentGallery extends Fragment {
 
 	RecyclerView recyclerView;
 	RecyclerView.LayoutManager layoutManager;
+
 	RecyclerView.Adapter adapter;
 
 	public MFragmentGallery(MainActivity _activity) {
@@ -45,9 +47,9 @@ public class MFragmentGallery extends Fragment {
 
 		String[] main_text =  {"코딩","하루"};
 		String[] main_text2 =  {"test","test1"};
-
 		adapter = new Main2Adapter(main_text, main_text2);
 		recyclerView.setAdapter(adapter);
+		recyclerView.addItemDecoration(new DividerItemDecoration(mView.getContext(), 1));
 
 		return mView;
 
