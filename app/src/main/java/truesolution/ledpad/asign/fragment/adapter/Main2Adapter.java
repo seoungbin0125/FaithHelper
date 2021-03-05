@@ -27,9 +27,7 @@ public class Main2Adapter extends RecyclerView.Adapter<Main2Adapter.MainHolder> 
             super(view);
             this.main_text = view.findViewById(R.id.text1);
             this.main_text2 = view.findViewById(R.id.text2);
-
         }
-
     }
 
     @NonNull

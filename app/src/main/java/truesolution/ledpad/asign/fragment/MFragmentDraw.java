@@ -21,6 +21,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import truesolution.ledpad.asign.MDEBUG;
 import truesolution.ledpad.asign.MainActivity;
 import truesolution.ledpad.asign.R;
 import truesolution.ledpad.asign.app.MAPP;
@@ -60,7 +61,7 @@ public class MFragmentDraw extends Fragment {
 		if (mView == null) {
 			mView = inflater.inflate(R.layout.fragment_draw, container, false);
 		}
-		new JsoupAsyncTask().execute();
+//		new JsoupAsyncTask().execute();
 		return mView;
 	}
 
@@ -73,19 +74,16 @@ public class MFragmentDraw extends Fragment {
 		@Override
 		protected void onPostExecute(Void aVoid) {
 
-			XmlPullParserFactory factory = null;
-			XmlPullParser xmlParser = null;
+
 
 			try {
-				Elements fields = document.select("hi");
-
-				int eventType = xmlParser.getEventType();
-
+				Elements fields = document.select("item");
+				for(int i=1; i<fields.size(); i++) {
+					MDEBUG.debug("i : " + i + fields.get(i).select("gubun").text());
+				}
 			} catch (Exception e) {
-
 			}
 		}
-
 		@Override
 		protected void onProgressUpdate(Void... values) {
 			super.onProgressUpdate(values);
