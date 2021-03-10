@@ -9,20 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import truesolution.ledpad.asign.R;
 import truesolution.ledpad.asign.fragment.str.STR_ISSUE;
 
 public class MRealTimeIssueDataAdapter extends RecyclerView.Adapter<MRealTimeIssueDataAdapter.MainHolder> {
-    private String[] mIssueRank, mIssueTitle, mIssueLink, mIssueRankChange;
+//    private String[] mIssueRank, mIssueTitle, mIssueLink, mIssueRankChange;
     MainHolder mainHolder;
 
+    private List<STR_ISSUE> mIssueList = new ArrayList<>();
+
     // 생성자
-    public MRealTimeIssueDataAdapter(String[] mIssueRank, String[] mIssueTitle, String[] mIssueLink, String[] mIssueRankChange) {
-        this.mIssueRank = mIssueRank;
-        this.mIssueTitle = mIssueTitle;
-        this.mIssueLink = mIssueLink;
-        this.mIssueRankChange = mIssueRankChange;
+    public MRealTimeIssueDataAdapter(List<STR_ISSUE> mIssueList) {
+        this.mIssueList = mIssueList;
     }
 
     public static class MainHolder extends RecyclerView.ViewHolder {
@@ -47,15 +47,15 @@ public class MRealTimeIssueDataAdapter extends RecyclerView.Adapter<MRealTimeIss
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder mainHolder, int i) {
-        mainHolder.mIssueRank.setText("검색 순위 : " + this.mIssueRank[i]);
-        mainHolder.mIssueTitle.setText("제목 : " + this.mIssueTitle[i]);
-        mainHolder.mIssueLink.setText("링크 : " + this.mIssueLink[i]);
-        mainHolder.mIssueRankChange.setText("순위 변동 : " + this.mIssueRankChange[i]);
+        mainHolder.mIssueRank.setText("검색 순위 : " + this.mIssueList.get(i).mRank);
+        mainHolder.mIssueTitle.setText("제목 : " + this.mIssueList.get(i).mIssueTitle);
+        mainHolder.mIssueLink.setText("링크 : " + this.mIssueList.get(i).mUrl);
+        mainHolder.mIssueRankChange.setText("순위 변동 : " + this.mIssueList.get(i).mRankChange);
     }
 
     @Override
 
     public int getItemCount() {
-        return mIssueRank.length;
+        return mIssueList.size();
     }
 }

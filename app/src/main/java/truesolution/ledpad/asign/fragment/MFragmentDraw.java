@@ -55,7 +55,10 @@ public class MFragmentDraw extends Fragment {
 	RecyclerView.LayoutManager layoutManager;
 	RecyclerView.Adapter adapter;
 
-	ArrayList<STR_ISSUE> _list = new ArrayList<>();
+	ArrayList<STR_ISSUE> mList = new ArrayList<>();
+
+	int mRenewCount = 0;
+	Timer mTimer = new Timer();
 
 	/**
 	 * Instantiates a new M fragment draw.
@@ -79,11 +82,18 @@ public class MFragmentDraw extends Fragment {
 		recyclerView = mView.findViewById(R.id.recyclerView);
 		layoutManager = new LinearLayoutManager(mActivity);
 		recyclerView.setLayoutManager(layoutManager);
-
+		adapter = new MRealTimeIssueDataAdapter(mList);
+		recyclerView.setAdapter(adapter);
 
 //		new IssueData().execute();
 		timer_crawling_issueData();
 		return mView;
+	}
+
+	@Override
+	public void onDestroy() {
+		mTimer.cancel();
+		super.onDestroy();
 	}
 
 	private class IssueData extends AsyncTask<Void, Void, Void>{
@@ -98,35 +108,24 @@ public class MFragmentDraw extends Fragment {
 
 				Document document = Jsoup.connect("https://www.nate.com/?f=auto_news").get();
 				Elements doc = document.select("#olLiveIssueKeyword li");
-				String url2;
 
-
-//				text = doc.select("h4").text();
 				MDEBUG.debug("doc.size() : " + doc.size());
-
+				mRenewCount++;
+				if (mRenewCount >= 2) {
+					mList.clear();
+					mRenewCount = 0;
+				}
 				for(int i=0; i<doc.size(); i++) {
 					STR_ISSUE issue_data = new STR_ISSUE();
-
-//					rank[i] = doc.get(i).select("li").get(0).select(".num_rank").text();
 					issue_data.mRank =  doc.get(i).select("li").get(0).select(".num_rank").text();
-//					url[i] = doc.get(i).select("li").get(0).select(".num_rank").get(0).absUrl("href");
-//					url2 = doc.get(i).select("li").get(0).absUrl("href");
 					issue_data.mUrl = doc.get(i).select("li").get(0).absUrl("href");
-
-//					url = doc.get(i).select("li").get(0).select("a").get(0).absUrl("href");
-//					totalUrl = doc.get(i).select("li").get(0).select("a").text();
-
-//					issueText = doc.get(i).select("li").get(0).select(".txt_rank").text();
 					issue_data.mIssueTitle = doc.get(i).select("li").get(0).select(".txt_rank").text();
-//					rankChange = doc.get(i).select("li").get(0).select(".nHide").text();
-
 					issue_data.mRankChange = doc.get(i).select("li").get(0).select(".nHide").text();
-
 					MDEBUG.debug("rank : " + issue_data.mRank);
 					MDEBUG.debug("url : " + issue_data.mUrl);
 					MDEBUG.debug("issueText : " + issue_data.mIssueTitle);
 					MDEBUG.debug("rankChange : " + issue_data.mRankChange);
-					_list.add(issue_data);
+					mList.add(issue_data);
 				}
 
 			} catch (Exception e) {
@@ -138,37 +137,13 @@ public class MFragmentDraw extends Fragment {
 
 		@Override
 		protected void onPostExecute(Void aVoid) {
-			String[] rank = new String[_list.size()];
-			String[] url= new String[_list.size()];
-			String[] issueTitle = new String[_list.size()];
-			String[] rankChange = new String[_list.size()];
-
-			for (int i = 0; i < _list.size(); i++) {
-				rank[i] = _list.get(i).mRank;
-				url[i] = _list.get(i).mUrl;
-				issueTitle[i] = _list.get(i).mIssueTitle;
-				rankChange[i] = _list.get(i).mRankChange;
-
-				MDEBUG.debug("rank[i] : " + rank[i]);
-				MDEBUG.debug("IssueTitle[i] : " + issueTitle[i]);
-			}
-			adapter = new MRealTimeIssueDataAdapter(rank, issueTitle, url, rankChange);
-			adapter.notifyDataSetChanged();
-//			if(	recyclerView.getChildCount() >= 10) {
-//				recyclerView.removeAllViewsInLayout();
-//				adapter.notifyDataSetChanged();
-//				MDEBUG.debug("@@@@@@@@@@@@@@recyclerView.getChildCount()" + recyclerView.getChildCount());
-//				recyclerView.notifyItem
-//			}
 			MDEBUG.debug("recyclerView.getChildCount()" + recyclerView.getChildCount());
-			recyclerView.setAdapter(adapter);
-			recyclerView.addItemDecoration(new DividerItemDecoration(mView.getContext(), 1));
+			adapter.notifyDataSetChanged();
 		}
 	}
 
 	public void timer_crawling_issueData () {
-		Timer timer = new Timer();
-		timer.schedule(addTask, 0, 5000);
+		mTimer.schedule(addTask, 0, 5000);
 	}
 
 	TimerTask addTask = new TimerTask() {
