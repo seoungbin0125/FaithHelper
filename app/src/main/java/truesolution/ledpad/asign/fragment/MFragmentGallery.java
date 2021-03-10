@@ -97,8 +97,6 @@ public class MFragmentGallery extends Fragment {
 		@Override
 		protected void onPostExecute(Void aVoid) {
 
-
-
 			try {
 				Elements fields = document.select("item");
 				for(int i=1; i<fields.size(); i++) {

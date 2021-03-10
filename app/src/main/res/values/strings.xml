@@ -21,7 +21,7 @@
 
     <!-- Title Text -->
     <string name="text_menu_title_qt">풍삶Q.T</string>
-    <string name="text_menu_title_title">최성빈 최고</string>
+    <string name="text_menu_title_title">실시간 검색어</string>
 
     <string name="text_menu_title_gallery">갤러리</string>
 <!--    <string name="text_menu_title_draw_text">그리기&amp;텍스트</string>-->
