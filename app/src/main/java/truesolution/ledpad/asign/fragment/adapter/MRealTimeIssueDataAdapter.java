@@ -47,8 +47,8 @@ public class MRealTimeIssueDataAdapter extends RecyclerView.Adapter<MRealTimeIss
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder mainHolder, int i) {
-        mainHolder.mIssueRank.setText("검색 순위 : " + this.mIssueList.get(i).mRank);
-        mainHolder.mIssueTitle.setText("제목 : " + this.mIssueList.get(i).mIssueTitle);
+        mainHolder.mIssueRank.setText(this.mIssueList.get(i).mRank);
+        mainHolder.mIssueTitle.setText(this.mIssueList.get(i).mIssueTitle);
         mainHolder.mIssueLink.setText("링크 : " + this.mIssueList.get(i).mUrl);
         mainHolder.mIssueRankChange.setText("순위 변동 : " + this.mIssueList.get(i).mRankChange);
     }
