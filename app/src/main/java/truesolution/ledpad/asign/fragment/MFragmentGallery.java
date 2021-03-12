@@ -1,33 +1,38 @@
 package truesolution.ledpad.asign.fragment;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 import truesolution.ledpad.asign.MDEBUG;
 import truesolution.ledpad.asign.MainActivity;
 import truesolution.ledpad.asign.R;
-import truesolution.ledpad.asign.fragment.adapter.Main2Adapter;
+import truesolution.ledpad.asign.app.MAPP;
+import truesolution.ledpad.asign.async.EmoticonFavoriteDBDataAsyncTask;
+import truesolution.ledpad.asign.db.MAppDatabase;
+import truesolution.ledpad.asign.fd.FD_ASSETS;
+import truesolution.ledpad.asign.fd.FD_DRAW;
+import truesolution.ledpad.asign.fragment.adapter.MGalleryBaseAdapter;
+import truesolution.ledpad.asign.fragment.str.STR_GalleryCell;
 
 /**
  * Created by TCH on 2020/07/07
@@ -37,111 +42,99 @@ import truesolution.ledpad.asign.fragment.adapter.Main2Adapter;
  * @since 2020 /07/07
  */
 public class MFragmentGallery extends Fragment {
+	private static final int TAB_MENU_CATEGORY                  = 0;
+	private static final int TAB_MENU_ALL                       = 1;
+	private static final int TAB_MENU_FAVORITE                  = 2;
+	private int mTabMenu;
 
+	/**
+	 * The Tv search box.
+	 */
+	public TextView tvSearchBox;
+	/**
+	 * The Tv btn search box.
+	 */
+	public TextView tvBtnSearchBox;
+	/**
+	 * The Et gallery search.
+	 */
+	public EditText etGallerySearch;
+
+	/**
+	 * The Btn tab menu category.
+	 */
+// Tab
+	public TextView btnTabMenuCategory;
+	/**
+	 * The Btn tab menu all.
+	 */
+	public TextView btnTabMenuAll;
+	/**
+	 * The Btn tab menu favorite.
+	 */
+	public TextView btnTabMenuFavorite;
+	/**
+	 * The M is depth.
+	 */
+	public boolean mIsDepth                         = true;
+
+	/**
+	 * The Tv btn gallery add.
+	 */
+	public TextView tvBtnGalleryAdd;
+
+	/**
+	 * The Rl sub tab menu.
+	 */
+	public LinearLayout rlSubTabMenu;
+	/**
+	 * The Rl draw top.
+	 */
+	public RelativeLayout rlDrawTop;
 	private View mView;
 	private MainActivity mActivity;
+	private GridView gvGalleryList;
+	private List<STR_GalleryCell> mGalleryList;
+	private List<STR_GalleryCell> mDisplayGalleryList = new ArrayList<>();
+	private String mFileDirPath;
 
-	Date currentTime = Calendar.getInstance().getTime();
-	SimpleDateFormat weekdayFormat = new SimpleDateFormat("EE", Locale.getDefault());
-	SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
-	SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
-	SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
-
-	String weekDay = weekdayFormat.format(currentTime);
-	String year = yearFormat.format(currentTime);
-	String month = monthFormat.format(currentTime);
-	String day = dayFormat.format(currentTime);
-
-	String totalDay = year + month + day;
-
-	RecyclerView recyclerView;
-	RecyclerView.LayoutManager layoutManager;
-
-	RecyclerView.Adapter adapter;
-	Document document;
-
-	String url ="http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=ZvK%2BdJQ7edFGA6is2AVZ28YDx8Q6dWSWTrTKJjALh9U1Yr%2Fk5oNlcHidHMe3dcmKPVPCZBomkqPqirxeJyJ9Ng%3D%3D&pageNo=1&numOfRows=10&startCreateDt=" + totalDay +" &endCreateDt=" +
-			totalDay;
-
-	String TodayPatient = "";
-
-	String[] main_text =  {"금일 확진자 : "};
-	String[] main_text2 =  {"test"};
-
-	public MFragmentGallery() {
-//		mActivity = _activity;
-	}
-
-	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		Object obj;
-		if(getActivity() != null && getActivity() instanceof MainActivity) {
-			obj = ((MainActivity)getActivity()).getData();
-			this.mActivity = (MainActivity)obj;
-		}
+	/**
+	 * Instantiates a new M fragment gallery.
+	 *
+	 * @param _activity the activity
+	 * @param _path     the path
+	 * @param _list     the list
+	 */
+	public MFragmentGallery(MainActivity _activity, String _path, List<STR_GalleryCell> _list) {
+		mActivity = _activity;
+		mGalleryList = _list;
+		mFileDirPath = _path;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		if (mView == null) {
-			mView = inflater.inflate(R.layout.fragment_api_info, container, false);
+		if(mView == null) {
+			mView = inflater.inflate(R.layout.fragment_food_shop_info, container, false);
+			mFindView(mView);
 		}
-		recyclerView = mView.findViewById(R.id.recyclerView);
-		layoutManager = new LinearLayoutManager(mActivity);
-		recyclerView.setLayoutManager(layoutManager);
-
-		MDEBUG.debug("webnautes" + year + "년 " + month + "월 " + day + "일 " + weekDay + "요일");
-		MDEBUG.debug("날짜 : " + totalDay);
-		mActivity.print("test ok");
-		new JsoupAsyncTask().execute();
-
 		return mView;
-
 	}
 
-	public class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-		}
+	/**
+	 * Find View
+	 *
+	 * @param _view the view
+	 */
+	public void mFindView(View _view) {
+		tvSearchBox = _view.findViewById(R.id.tvSearchBox);
+		tvBtnSearchBox = _view.findViewById(R.id.tvBtnSearchBox);
+		etGallerySearch = _view.findViewById(R.id.etGallerySearch);
 
-		@Override
-		protected void onPostExecute(Void aVoid) {
-
-			try {
-				Elements fields = document.select("item");
-				for(int i=1; i<fields.size(); i++) {
-					MDEBUG.debug("i : " + i + fields.get(i).select("gubun").text());
-					if (fields.get(i).select("gubun").text().equals("합계")) {
-						TodayPatient = fields.get(i).select("incDec").text();
-						MDEBUG.debug("TodayPatient : " + TodayPatient);
-						main_text2[0] = TodayPatient;
-
-					}
-				}
-			} catch (Exception e) {
+		gvGalleryList = _view.findViewById(R.id.gvFoodList);
+		gvGalleryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 			}
-			adapter = new Main2Adapter(main_text, main_text2);
-			recyclerView.setAdapter(adapter);
-			recyclerView.addItemDecoration(new DividerItemDecoration(mView.getContext(), 1));
-		}
-		@Override
-		protected void onProgressUpdate(Void... values) {
-			super.onProgressUpdate(values);
-		}
-
-		@Override
-		protected Void doInBackground(Void... voids) {
-			try {
-				document = Jsoup.connect(url).get();
-//				System.out.println("system msg : " + document);
-//				Log.d("TAG", "Msg : " + document);
-			} catch (IOException e) {
-				System.out.println("error! ");
-				e.printStackTrace();
-			}
-			return null;
-		}
+		});
 	}
 }
