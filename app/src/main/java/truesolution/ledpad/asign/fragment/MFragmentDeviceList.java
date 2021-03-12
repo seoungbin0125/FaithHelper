@@ -1,7 +1,6 @@
 package truesolution.ledpad.asign.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-import truesolution.ledpad.asign.MDEBUG;
 import truesolution.ledpad.asign.MainActivity;
 import truesolution.ledpad.asign.R;
 
@@ -38,7 +36,7 @@ public class MFragmentDeviceList extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		if(mView == null) {
-			mView = inflater.inflate(R.layout.fragment_device_list, container, false);
+			mView = inflater.inflate(R.layout.fragment_daliy_qt, container, false);
 
 			mWebView = (WebView) mView.findViewById(R.id.webView);//xml 자바코드 연결
 			mWebView.getSettings().setJavaScriptEnabled(true);//자바스크립트 허용

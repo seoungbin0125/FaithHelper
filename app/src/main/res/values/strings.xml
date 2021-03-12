@@ -22,8 +22,8 @@
     <!-- Title Text -->
     <string name="text_menu_title_qt">풍삶Q.T</string>
     <string name="text_menu_title_title">실시간 검색어</string>
-
-    <string name="text_menu_title_gallery">갤러리</string>
+    <string name="text_menu_title_api_info">코로나, 날씨 정보</string>
+    <string name="text_menu_title_food_shop">음식점</string>
 <!--    <string name="text_menu_title_draw_text">그리기&amp;텍스트</string>-->
     <string name="text_menu_title_draw_text">그리기</string>
     <string name="text_menu_title_info">정보</string>

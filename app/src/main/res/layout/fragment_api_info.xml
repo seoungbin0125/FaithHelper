@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
-            android:text="@string/text_menu_title_title"/>
+            android:text="@string/text_menu_title_api_info"/>
 
         <TextView
             android:id="@+id/tvBtnDeviceListTopMenuInfo"
@@ -33,6 +33,7 @@
         android:layout_below="@id/rlDeviceListTop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/c_black"
         android:id="@+id/recyclerView"/>
 
 </RelativeLayout>

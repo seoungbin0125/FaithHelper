@@ -3,7 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/c_white"
+    android:background="@color/c_sm_bg"
+    android:layout_marginBottom="5dp"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,8 @@
             android:id="@+id/mIssueRank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="25dp"
+            android:textColor="@color/c_black"
             android:textStyle="bold"
             android:text="TextView" />
 
@@ -22,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="20dp"
+            android:textColor="@color/c_black"
+            android:textSize="25dp"
             android:textColorHighlight="@color/c_cl_red"
             android:text="TextView" />
 

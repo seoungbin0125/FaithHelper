@@ -3,12 +3,12 @@
 
     <item
         android:state_pressed="true"
-        android:drawable="@drawable/nav_1_select_active"
+        android:drawable="@drawable/nav_1"
         />
 
     <item
         android:state_selected="true"
-        android:drawable="@drawable/nav_1_select_active"
+        android:drawable="@drawable/nav_1"
         />
 <!--
     <item

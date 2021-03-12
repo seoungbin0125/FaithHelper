@@ -33,7 +33,7 @@ public class Main2Adapter extends RecyclerView.Adapter<Main2Adapter.MainHolder> 
     @NonNull
     @Override
     public MainHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View holderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_holder_view, parent, false);
+        View holderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.covid19_daily_count_holder_view, parent, false);
         mainHolder = new MainHolder(holderView);
         return mainHolder;
     }

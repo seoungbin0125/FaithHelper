@@ -120,22 +120,200 @@ public class MainActivity extends MBaseActivity {
 	@BindView(R.id.vpMain)
 	MSwipeViewPager vpMain;
 
-
 	/**
-	 * Directory File Path
+	 * Gallery setion
 	 */
+
+	private List<MD_Category> mCategoryList = new ArrayList<>();
+	private List<MD_Emoticon> mEmoticonList = new ArrayList<>();
+	private List<STR_GalleryCell> mStrGalleryList = new ArrayList<>();
 	private String mFileDirPath;
 
+
+	public MMCategoryAddDialog mCategoryAddDialog;
+
+
+	public class MMCategoryAddDialog extends MCategoryAddDialog {
+		/**
+		 * Instantiates a new Mm category add dialog.
+		 *
+		 * @param _activity the activity
+		 */
+		public MMCategoryAddDialog(MainActivity _activity) {
+			super(_activity);
+		}
+
+		@Override
+		public void mBtnYes(String _name) {
+			MDEBUG.debug("MMCategoryAddDialog mBtnYes _name : " + _name);
+
+			MD_Category _md = new MD_Category();
+			_md.mName = _name;
+			_md.mResID = R.drawable.cate_default;
+			_md.mSubIdx = MAPP.ERROR_;
+			_md.mIsImgDefault = true;
+
+			new MCategoryAddDBDataAsyncTask(MainActivity.this, MAPP.mAppDatabase, _md).execute();
+		}
+
+		@Override
+		public void mBtnNo() {
+			MDEBUG.debug("mBtnNo!");
+		}
+	}
+
+	private class MCategoryAddDBDataAsyncTask extends CategoryAddDBDataAsyncTask {
+		/**
+		 * Instantiates a new M category add db data async task.
+		 *
+		 * @param _activity the activity
+		 * @param _mad      the mad
+		 * @param _str      the str
+		 */
+		public MCategoryAddDBDataAsyncTask(Activity _activity, MAppDatabase _mad, MD_Category _str) {
+			super(_activity, _mad, _str);
+			mShowProgress();
+		}
+
+		@Override
+		public void mResult() {
+			new MLoadRoomDBDataAsyncTask(MainActivity.this, MAPP.mAppDatabase).execute();
+		}
+	}
+
+	private class MLoadRoomDBDataAsyncTask extends LoadRoomDBDataAsyncTask {
+		/**
+		 * Instantiates a new M load room db data async task.
+		 *
+		 * @param _activity the activity
+		 * @param _md       the md
+		 */
+		public MLoadRoomDBDataAsyncTask(Activity _activity, MAppDatabase _md) {
+			super(_activity, _md);
+			mCategoryList.clear();
+			mEmoticonList.clear();
+			mStrGalleryList.clear();
+		}
+
+		@Override
+		public void mResult(List<MD_Category> _c_list, List<MD_Emoticon> _e_list) {
+			mCancelProgress();
+			mSetGalleryListData(_c_list, _e_list);
+			((MFragmentText)mFragmentText).mRefreshGallery();
+		}
+	}
+
+	private void mSetGalleryListData(List<MD_Category> _c_list, List<MD_Emoticon> _e_list) {
+		mCategoryList.addAll(_c_list);
+		mEmoticonList.addAll(_e_list);
+
+		// Set Category Data
+		for(int i = 0; i < mCategoryList.size(); i++) {
+			STR_GalleryCell _str = new STR_GalleryCell();
+			_str.mIsCategory = true;
+			MD_Category _md = mCategoryList.get(i);
+			_str.mSetCategoryData(_md.idx_, _md.mSubIdx, _md.mName, "", _md.mResID);
+			mStrGalleryList.add(_str);
+		}
+
+		// Set Emoticon Data
+		MDEBUG.debug("mEmoticonList.size() : " + mEmoticonList.size());
+		for(int i = 0; i < mEmoticonList.size(); i++) {
+			MDEBUG.debug("emoticon list i : " + i);
+			STR_GalleryCell _str = new STR_GalleryCell();
+			_str.mIsCategory = false;
+			MD_Emoticon _md = mEmoticonList.get(i);
+
+			MDEBUG.debug("_md.mW : " + _md.mW + ", _md.mH : " + _md.mH);
+			_str.mSetEmoticonData(_md.idx_, _md.mName,
+					_md.mCatergoryIdx, _md.mCatergoryName,
+					_md.mW, _md.mH,
+					_md.mIsOneEmoticon, _md.mEmoticonFilesPath, _md.mImageResID,
+					_md.mIsLocalData, _md.mIsFavorite, _md.mDescription, _md.mDate);
+			mStrGalleryList.add(_str);
+		}
+	}
+
+	public void mDeleteEmoticon(int _idx) {
+		MD_Emoticon _str_emoticon = null;
+		int _c_idx = MAPP.ERROR_;
+		for(int i = 0; i < mEmoticonList.size(); i++) {
+			MD_Emoticon _str = mEmoticonList.get(i);
+			if(_idx == _str.idx_) {
+				_c_idx = i;
+				_str_emoticon = _str;
+				break;
+			}
+		}
+
+		if(_str_emoticon != null)
+			new MEmoticonDeleteDBDataAsyncTask(MAPP.mAppDatabase, _str_emoticon, _c_idx).execute();
+	}
+
+	private class MEmoticonDeleteDBDataAsyncTask extends EmoticonDeleteDBDataAsyncTask {
+		/**
+		 * The M idx.
+		 */
+		int mIDX;
+
+		/**
+		 * Instantiates a new M emoticon delete db data async task.
+		 *
+		 * @param _mad the mad
+		 * @param _str the str
+		 * @param _idx the idx
+		 */
+		public MEmoticonDeleteDBDataAsyncTask(MAppDatabase _mad, MD_Emoticon _str, int _idx) {
+			super(_mad, _str);
+			mShowProgress();
+			mIDX = _idx;
+		}
+
+		@Override
+		public void mResult() {
+			mCancelProgress();
+			mEmoticonList.remove(mIDX);
+			((MFragmentText)mFragmentText).mUpdateList();
+		}
+	}
+
+	public void mDeleteCategory(int _idx) {
+		MD_Category _str_category = null;
+		for(int i = 0; i < mCategoryList.size(); i++) {
+			MD_Category _str = mCategoryList.get(i);
+			if(_idx == _str.idx_) {
+				_str_category = _str;
+				break;
+			}
+		}
+
+		if(_str_category != null)
+			new MCategoryDeleteDBDataAsyncTask(MAPP.mAppDatabase, _str_category).execute();
+	}
+
+	private class MCategoryDeleteDBDataAsyncTask extends CategoryDeleteDBDataAsyncTask {
+		/**
+		 * Instantiates a new M category delete db data async task.
+		 *
+		 * @param _mad the mad
+		 * @param _str the str
+		 */
+		public MCategoryDeleteDBDataAsyncTask(MAppDatabase _mad, MD_Category _str) {
+			super(_mad, _str);
+			mShowProgress();
+		}
+
+		@Override
+		public void mResult() {
+			new MLoadRoomDBDataAsyncTask(MainActivity.this, MAPP.mAppDatabase).execute();
+		}
+	}
+
 	/**
-	 * Transmit Recive Check
+	 * Gallery setion ++++++++++
 	 */
-	public byte sendCount;
-	public int mW, mH, mIDX;
-	int[][] mAllData;
-	int reqCnt = 0;
-	boolean sendBusyFlag = true;
-	boolean dialogStatus = false;
-	int reciveSuccessToken = -1;
+
+
 
 	// ViewPager
 	private MPagerAdapter mPagerAdapter;
@@ -319,7 +497,7 @@ public class MainActivity extends MBaseActivity {
 				return mFragmentDraw;
 			} else if (position == FD_MENU.TEXT_) {
 				if (mFragmentText == null)
-					mFragmentText = new MFragmentText(MainActivity.this);
+					mFragmentText = new MFragmentText(MainActivity.this, mFileDirPath, mStrGalleryList);
 				return mFragmentText;
 			} else if (position == FD_MENU.SHOW_MODE) {
 				if (mFragmentShowMode == null)
@@ -329,6 +507,13 @@ public class MainActivity extends MBaseActivity {
 
 			return null;
 		}
+	}
+
+	public void mKeyboardHide(EditText _et) {
+		InputMethodManager inputMethodManager =
+				(InputMethodManager) getSystemService(
+						Activity.INPUT_METHOD_SERVICE);
+		inputMethodManager.hideSoftInputFromWindow(_et.getWindowToken(), 0);
 	}
 
 	/**

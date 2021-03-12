@@ -32,6 +32,7 @@
         android:layout_below="@id/rlDeviceListTop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/c_white"
         android:id="@+id/recyclerView"/>
 
 </RelativeLayout>

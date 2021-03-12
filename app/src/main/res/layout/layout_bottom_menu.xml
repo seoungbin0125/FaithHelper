@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:background="@drawable/selector_bottom_icon_show_mode"/>
+            android:background="@drawable/selector_bottom_icon_gallery"/>
 
         <TextView
             android:id="@+id/tvBtnBottomMenuDraw"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:background="@drawable/selector_bottom_icon_show_mode"/>
+            android:background="@drawable/selector_bottom_icon_draw"/>
 
         <TextView
             android:id="@+id/tvBtnBottomMenuText"
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:background="@drawable/selector_bottom_icon_show_mode"/>
+            android:background="@drawable/selector_bottom_icon_info"/>
 
         <TextView
             android:id="@+id/tvBtnBottomMenuShowMode"
