@@ -1,11 +1,13 @@
 package truesolution.ledpad.asign.fragment;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -66,8 +68,18 @@ public class MFragmentGallery extends Fragment {
 	String[] main_text =  {"금일 확진자 : "};
 	String[] main_text2 =  {"test"};
 
-	public MFragmentGallery(MainActivity _activity) {
-		mActivity = _activity;
+	public MFragmentGallery() {
+//		mActivity = _activity;
+	}
+
+	@Override
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		Object obj;
+		if(getActivity() != null && getActivity() instanceof MainActivity) {
+			obj = ((MainActivity)getActivity()).getData();
+			this.mActivity = (MainActivity)obj;
+		}
 	}
 
 	@Override
@@ -81,6 +93,7 @@ public class MFragmentGallery extends Fragment {
 
 		MDEBUG.debug("webnautes" + year + "년 " + month + "월 " + day + "일 " + weekDay + "요일");
 		MDEBUG.debug("날짜 : " + totalDay);
+		mActivity.print("test ok");
 		new JsoupAsyncTask().execute();
 
 		return mView;

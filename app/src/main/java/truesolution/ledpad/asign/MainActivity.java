@@ -203,6 +203,10 @@ public class MainActivity extends MBaseActivity {
 		}
 	}
 
+	public Object getData() {
+		return MainActivity.this;
+	}
+
 	private void mSetGalleryListData(List<MD_Category> _c_list, List<MD_Emoticon> _e_list) {
 		mCategoryList.addAll(_c_list);
 		mEmoticonList.addAll(_e_list);
@@ -489,7 +493,7 @@ public class MainActivity extends MBaseActivity {
 				return mFragmentDeviceList;
 			} else if (position == FD_MENU.GALLERY_) {
 				if (mFragmentGallery == null)
-					mFragmentGallery = new MFragmentGallery(MainActivity.this);
+					mFragmentGallery = new MFragmentGallery();
 				return mFragmentGallery;
 			} else if (position == FD_MENU.DRAW_) {
 				if (mFragmentDraw == null)
@@ -507,6 +511,10 @@ public class MainActivity extends MBaseActivity {
 
 			return null;
 		}
+	}
+
+	public void print(String msg) {
+		MDEBUG.debug("msg :" + msg);
 	}
 
 	public void mKeyboardHide(EditText _et) {
